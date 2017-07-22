@@ -51,8 +51,6 @@ App::~App()
     delete m_msgQueue;
     m_msgQueue = NULL;
 
-    //delete m_packageFiles;
-    //m_packageFiles = NULL;
 }
 
 void App::Start()
@@ -142,7 +140,11 @@ void App::OnSurfaceChanged(const Message& msg)
         m_nativeWindow = (ANativeWindow*)newNativeWindow;
         if(m_egl->CreateSurface(m_nativeWindow))
         {
-            m_render->Init();
+            int width = 0;
+            int height = 0;
+            msg.GetParam(MSG_CONTENT_SURFACE_WIDTH, width);
+            msg.GetParam(MSG_CONTENT_SURFACE_HEIGHT, height);
+            m_render->Init(width, height);
             m_bStartRender = true;
         }
     }

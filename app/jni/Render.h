@@ -14,7 +14,7 @@ public:
     Render();
     ~Render();
     void Draw();
-    void Init();
+    void Init(int width, int height);
 
 private:
     Shader* m_shader;

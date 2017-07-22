@@ -1,13 +1,15 @@
 package com.example.administrator.egldemo;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.Window;
 
-public class MainActivity extends AppCompatActivity implements SurfaceHolder.Callback{
+public class MainActivity extends Activity implements SurfaceHolder.Callback{
 
     static {
         System.loadLibrary("EGLDemo");
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public native void nativeStart(long appPtr);
     public native void nativePause(long appPtr);
     public native void nativeStop(long appPtr);
-    public native void nativeSurfaceChanged(long appPtr, Surface surface);
+    public native void nativeSurfaceChanged(long appPtr, Surface surface, int width, int height);
     public native void nativeSurfaceDestroy(long appPtr);
     public native void nativeDestroy(long appPtr);
 
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height)
     {
         Log.d(TAG, "surfaceChanged");
-        nativeSurfaceChanged(app, holder.getSurface());
+        nativeSurfaceChanged(app, holder.getSurface(), width, height);
 
     }
 

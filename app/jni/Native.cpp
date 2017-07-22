@@ -48,7 +48,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_administrator_egldemo_MainActivity_nativeSurfaceChanged(JNIEnv* jni, jobject obj, long appPtr, jobject surface)
+    void Java_com_example_administrator_egldemo_MainActivity_nativeSurfaceChanged(JNIEnv* jni, jobject obj, long appPtr, jobject surface, jint width, jint height)
     {
         LOGD("nativeSurfaceChanged!");
         ANativeWindow * newNativeWindow = ANativeWindow_fromSurface( jni, surface );
@@ -63,6 +63,8 @@ extern "C"
                 }
                 Message msg(MESSAGE_ON_SURFACE_CHANGED);
                 msg.SetParam(MSG_CONTENT_ANATIVEWINDOW, newNativeWindow);
+                msg.SetParam(MSG_CONTENT_SURFACE_WIDTH, width);
+                msg.SetParam(MSG_CONTENT_SURFACE_HEIGHT, height);
                 app->m_msgQueue->PostMessage(msg);
             }
             else

@@ -24,24 +24,20 @@ static const char* fragment =
 
 static const char* cubeVertex =
     "attribute vec4 Position;\n"
-    "attribute vec3 color;\n"
     "attribute vec2 texcoord;\n"
-    "varying  vec3 ocolor;\n"
-    "varying vec2 otexcoord;\n"
+    "varying  vec2 otexcoord;\n"
     "void main()\n"
     "{\n"
-    "   ocolor = color;\n"
     "   otexcoord = texcoord;\n"
     "   gl_Position = Position;\n"
     "}\n";
 
 static const char* cubeFragment =
-    "varying  vec3 ocolor;\n"
-    "varying  vec2 otexcoord;\n"
+    "varying vec2 otexcoord;\n"
     "uniform sampler2D Texture0;\n"
 	"void main()\n"
 	"{\n"
-	"	gl_FragColor = texture2D( Texture0, otexcoord );// * vec4(ocolor, 1.0f);\n"
+	"	gl_FragColor = texture2D( Texture0, otexcoord );\n"
 	"}\n";
 
 
@@ -61,23 +57,25 @@ Render::~Render()
     m_shader = NULL;
 }
 
-void Render::Init()
+void Render::Init(int width, int height)
 {
-    glViewport(0, 0, 1000, 1000);
+    LOGD("Render::Init:glViewport:width:%d, height:%d", width, height);
+    glViewport(0, 0, width, height);
     m_shader = new Shader(cubeVertex, cubeFragment);
     LOGD("program:%d", m_shader->GetProgram());
 
     GLfloat vertices[] = {
-        // Positions          // Colors           // Texture Coords
-         0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f, // Top Right
-         0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, // Bottom Right
-        -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
-        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left
+        // Positions                     // Texture Coords
+        -1.0, -1.0, 0,     0.0, 0.0,   //左下
+        1.0,  -1.0, 0,     1.0, 0.0,   //左上
+         -1.0,  1.0, 0,     0.0, 1.0,   //右上
+         1.0, 1.0, 0,     1.0, 1.0,   //右下
+
     };
 
 
-    GLuint indices[] = {  // Note that we start from 0!
-        0, 1, 3, // First Triangle
+   GLuint indices[] = {  // Note that we start from 0!
+        0, 1, 2, // First Triangle
         1, 2, 3  // Second Triangle
     };
 
@@ -93,14 +91,11 @@ void Render::Init()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(0);
-     // Color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
-     // TexCoord attribute
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
@@ -122,6 +117,7 @@ void Render::Draw()
 
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    //glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
 }
 
