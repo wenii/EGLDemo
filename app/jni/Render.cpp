@@ -23,12 +23,12 @@ static const char* fragment =
 	"}\n";
 
 static const char* cubeVertex =
-    "attribute vec4 Position;\n"
-    "attribute vec2 texcoord;\n"
+    "layout(location = 0) attribute vec4 Position;\n"
+    "layout(location = 1) attribute vec2 texcoord;\n"
     "varying  vec2 otexcoord;\n"
     "void main()\n"
     "{\n"
-    "   otexcoord = texcoord;\n"
+    "   otexcoord = vec2(texcoord.x, 1.0 - texcoord.y);\n"
     "   gl_Position = Position;\n"
     "}\n";
 
@@ -65,16 +65,15 @@ void Render::Init(int width, int height)
     LOGD("program:%d", m_shader->GetProgram());
 
     GLfloat vertices[] = {
-        // Positions                     // Texture Coords
-        -1.0, -1.0, 0,     0.0, 0.0,   //左下
-        1.0,  -1.0, 0,     1.0, 0.0,   //左上
-         -1.0,  1.0, 0,     0.0, 1.0,   //右上
-         1.0, 1.0, 0,     1.0, 1.0,   //右下
-
+        // Positions       // Texture Coords
+        -0.5, -0.5, 0,     0.0, 0.0,   //左下
+        0.5,  -0.5, 0,     1.0, 0.0,   //右下
+        -0.5,  0.5, 0,     0.0, 1.0,   //左上
+        0.5,   0.5, 0,     1.0, 1.0,   //右上
     };
 
 
-   GLuint indices[] = {  // Note that we start from 0!
+    GLuint indices[] = {  // Note that we start from 0!
         0, 1, 2, // First Triangle
         1, 2, 3  // Second Triangle
     };
@@ -107,17 +106,16 @@ void Render::Init(int width, int height)
 
 void Render::Draw()
 {
-	glClearColor( 1.0f, 1.0f, 1.0f, 1.0f );
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 	m_shader->Use();
 
 	glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
-    //glUniform1i(glGetUniformLocation(m_shader->GetProgram(), "Texture0"), 0);
+    glUniform1i(glGetUniformLocation(m_shader->GetProgram(), "Texture0"), 0);
 
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-    //glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindVertexArray(0);
 }
 
