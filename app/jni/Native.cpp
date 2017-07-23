@@ -10,13 +10,13 @@
 #include "MessageQueue.h"
 extern "C"
 {
-    long Java_com_example_administrator_egldemo_MainActivity_nativeSetApp(JNIEnv* jni, jobject obj)
+    long Java_com_example_egllib_EGLActivity_nativeSetApp(JNIEnv* jni, jobject obj)
     {
         return (long)(new App(jni, obj));
     }
 
 
-    void Java_com_example_administrator_egldemo_MainActivity_nativeStart(JNIEnv* jni, jobject obj, long appPtr)
+    void Java_com_example_egllib_EGLActivity_nativeStart(JNIEnv* jni, jobject obj, long appPtr)
     {
         LOGD("nativeStart!");
         App* app = (App*)appPtr;
@@ -26,7 +26,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_administrator_egldemo_MainActivity_nativePause(JNIEnv* jni, jobject obj, long appPtr)
+    void Java_com_example_egllib_EGLActivity_nativePause(JNIEnv* jni, jobject obj, long appPtr)
     {
         LOGD("nativePause!");
         App* app = (App*)appPtr;
@@ -37,7 +37,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_administrator_egldemo_MainActivity_nativeStop(JNIEnv* jni, jobject obj, long appPtr)
+    void Java_com_example_egllib_EGLActivity_nativeStop(JNIEnv* jni, jobject obj, long appPtr)
     {
         LOGD("nativeStop!");
         App* app = (App*)appPtr;
@@ -48,7 +48,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_administrator_egldemo_MainActivity_nativeSurfaceChanged(JNIEnv* jni, jobject obj, long appPtr, jobject surface, jint width, jint height)
+    void Java_com_example_egllib_EGLActivity_nativeSurfaceChanged(JNIEnv* jni, jobject obj, long appPtr, jobject surface, jint width, jint height)
     {
         LOGD("nativeSurfaceChanged!");
         ANativeWindow * newNativeWindow = ANativeWindow_fromSurface( jni, surface );
@@ -74,7 +74,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_administrator_egldemo_MainActivity_nativeSurfaceDestroy(JNIEnv* jni, jobject obj, long appPtr)
+    void Java_com_example_egllib_EGLActivity_nativeSurfaceDestroy(JNIEnv* jni, jobject obj, long appPtr)
     {
         LOGD("nativeSurfaceDestroy!");
         App* app = (App*)appPtr;
@@ -85,7 +85,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_administrator_egldemo_MainActivity_nativeDestroy(JNIEnv* jni, jobject obj, long appPtr)
+    void Java_com_example_egllib_EGLActivity_nativeDestroy(JNIEnv* jni, jobject obj, long appPtr)
     {
         LOGD("nativeActiveDestroy!");
         App* app = (App*)appPtr;

@@ -11,7 +11,7 @@
 #include "PackageFiles.h"
 
 
-static const char* activityClassName = "com/example/administrator/egldemo/MainActivity";
+static const char* activityClassName = "com/example/egllib/EGLActivity";
 
 App::App(JNIEnv* jni, jobject activityObject)
 {
