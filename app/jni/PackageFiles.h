@@ -10,21 +10,14 @@
 class PackageFiles
 {
 public:
-    unsigned int LoadTextureFromFile(const char* filename);
-
-    void SetZipFilePath(const char* filePath);
-    void OpenZipFile(const char* filePath);
-
-    bool ReadFileFromApplicationPackage(const char * nameInZip, int & length, void * & buffer );
-
-    static PackageFiles* GetInstance();
-
-
+    static void SetZipFilePath(const char* filePath);
+    static bool ReadFileFromApplicationPackage(const char * nameInZip, int & length, void * & buffer );
 
 private:
-    char zipFilePath[1024];
-    unzFile zipFile;
-
+    static void OpenZipFile(const char* filePath);
+private:
+    static char zipFilePath[1024];
+    static unzFile zipFile;
 };
 
 

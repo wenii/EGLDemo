@@ -10,6 +10,7 @@
 class Texture
 {
 public:
+    static unsigned int LoadTextureFromPackage(const char* filename);
     static unsigned int LoadTextureFromBuffer(void* buffer, int length);
 };
 

@@ -7,6 +7,7 @@
 #include <GLES3/gl3.h>
 #include <GLES3/gl3ext.h>
 #include <unistd.h>
+#include "PackageFiles.h"
 
 
 unsigned int Texture::LoadTextureFromBuffer(void* buffer, int length)
@@ -30,5 +31,19 @@ unsigned int Texture::LoadTextureFromBuffer(void* buffer, int length)
         glBindTexture(GL_TEXTURE_2D, 0);
     }
     stbi_image_free(image);
+    return textID;
+}
+
+unsigned int  Texture::LoadTextureFromPackage(const char* filename)
+{
+    int length = 0;
+    void* buffer = NULL;
+    unsigned int textID = 0;
+    if(PackageFiles::ReadFileFromApplicationPackage(filename, length, buffer) && buffer != NULL)
+    {
+        textID = LoadTextureFromBuffer(buffer, length);
+    }
+
+    free(buffer);
     return textID;
 }

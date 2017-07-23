@@ -21,7 +21,8 @@ private:
     GLuint VAO;
     GLuint VBO;
     GLuint EBO;
-    GLuint texture;
+    GLuint texture0;
+    GLuint texture1;
 
 
 };

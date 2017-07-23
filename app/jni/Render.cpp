@@ -6,7 +6,7 @@
 #include "Log.h"
 #include <unistd.h>
 #include "Shader.h"
-#include "PackageFiles.h"
+#include "Texture.h"
 
 
 static const char* vertex =
@@ -35,9 +35,10 @@ static const char* cubeVertex =
 static const char* cubeFragment =
     "varying vec2 otexcoord;\n"
     "uniform sampler2D Texture0;\n"
+    "uniform sampler2D Texture1;\n"
 	"void main()\n"
 	"{\n"
-	"	gl_FragColor = texture2D( Texture0, otexcoord );\n"
+	"	gl_FragColor = mix(texture2D( Texture0, otexcoord ) , texture2D(Texture1, otexcoord), 0.2);\n"
 	"}\n";
 
 
@@ -99,8 +100,9 @@ void Render::Init(int width, int height)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    texture = PackageFiles::GetInstance()->LoadTextureFromFile("assets/awesomeface.png");
-    LOGD("Render::Init:textID:%d", texture);
+    texture0 = Texture::LoadTextureFromPackage("assets/container.jpg");
+    texture1 = Texture::LoadTextureFromPackage("assets/awesomeface.png");
+    LOGD("Render::Init:textID:%d, %d", texture0, texture1);
 
 }
 
@@ -111,8 +113,12 @@ void Render::Draw()
 	m_shader->Use();
 
 	glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, texture0);
     glUniform1i(glGetUniformLocation(m_shader->GetProgram(), "Texture0"), 0);
+
+	glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, texture1);
+    glUniform1i(glGetUniformLocation(m_shader->GetProgram(), "Texture1"), 1);
 
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

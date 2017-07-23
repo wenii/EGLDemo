@@ -4,27 +4,10 @@
 
 #include "PackageFiles.h"
 #include "Log.h"
-#include "Texture.h"
 
-PackageFiles* PackageFiles::GetInstance()
-{
-    static PackageFiles instance;
-    return &instance;
-}
 
-unsigned int  PackageFiles::LoadTextureFromFile(const char* filename)
-{
-    int length = 0;
-    void* buffer = NULL;
-    unsigned int textID = 0;
-    if(ReadFileFromApplicationPackage(filename, length, buffer) && buffer != NULL)
-    {
-        textID = Texture::LoadTextureFromBuffer(buffer, length);
-    }
-
-    free(buffer);
-    return textID;
-}
+unzFile PackageFiles::zipFile = 0;
+char PackageFiles::zipFilePath[1024];
 
 void PackageFiles::SetZipFilePath(const char* filePath)
 {

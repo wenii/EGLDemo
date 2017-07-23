@@ -34,7 +34,7 @@ App::App(JNIEnv* jni, jobject activityObject)
     JniUtils::GetPackageCodePath( jni, ActivityClass, javaObject, apkPath, sizeof( apkPath ) );
     LOGD("apkPath:%s", apkPath);
 
-    PackageFiles::GetInstance()->SetZipFilePath(apkPath);
+    PackageFiles::SetZipFilePath(apkPath);
 
 }
 
