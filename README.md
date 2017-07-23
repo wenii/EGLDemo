@@ -1,6 +1,6 @@
 # EGLDemo
 A demo for EGL and OpenGL ES on the Android platform
 
-## environment
+## Environment
 - Android Studio 2.1.2
-- android-ndk-r10e
+- Android-ndk-r10e
