@@ -1,1 +1,1 @@
-include ':app', ':egllib'
+include ':platform', ':samples:texture'
