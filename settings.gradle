@@ -1,1 +1,1 @@
-include ':app'
+include ':platform', ':samples:texture'
