@@ -1,10 +1,8 @@
 //
-// Created by Administrator on 2017/7/20.
+// Created by Administrator on 2017/7/26.
 //
-#include "Math.h"
-namespace EGLDemo
-{
 
+#include "DynamicArray.h"
 DynamicArray::DynamicArray()
 {
 }
@@ -22,6 +20,7 @@ bool DynamicArray::GetValue(int key, int& value)    const
 
 void DynamicArray::SetValue(int key, const int& value)
 {
+
     intMap[key] = value;
 }
 
@@ -55,5 +54,3 @@ void DynamicArray::SetValue(int key, const void* value)
 {
     *(void **)&voidPtrMap[key] = const_cast<void*>(value);
 }
-
-}   //namespace EGLDemo

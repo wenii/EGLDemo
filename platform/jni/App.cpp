@@ -83,13 +83,13 @@ void App::ThreadFun()
 
     while(!m_bDestroy)
     {
-        LOGD("loop!");
+        //LOGD("loop!");
         ProcessEvent();
-        sleep(1);
+        //sleep(1);
 
         if(m_bStartRender)
         {
-            LOGD("Draw");
+            //LOGD("Draw");
             Interface->OnDraw();
             m_egl->SwapBuffers();
         }

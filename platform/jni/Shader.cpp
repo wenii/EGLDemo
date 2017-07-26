@@ -5,11 +5,33 @@
 #include "Shader.h"
 #include "Log.h"
 #include <unistd.h>
+#include <GLES3/gl3.h>
+#include <GLES3/gl3ext.h>
+#include "PackageFiles.h"
 
-
-Shader::Shader(const char* vertex, const char* fragment)
+void Shader::CreateProgramFromString(const char* vertexString, const char* fragmentSting)
 {
-    m_program = createProgram(vertex, fragment);
+    m_program = createProgram(vertexString, fragmentSting);
+}
+void Shader::CreateProgramFromFile(const char* vertexFile, const char* fragmentFile)
+{
+    int length = 0;
+    void* vertexBuffer = NULL;
+    void* fragmentBuffer = NULL;
+
+    PackageFiles::ReadFileFromApplicationPackage(vertexFile, length, vertexBuffer);
+    LOGD("Shader::CreateProgramFromFile:vertexFile:%s, length:%d, vertexBuffer:%s", vertexFile, length, (char*)vertexBuffer);
+
+    PackageFiles::ReadFileFromApplicationPackage(fragmentFile, length, fragmentBuffer);
+    LOGD("Shader::CreateProgramFromFile:vertexFile:%s, length:%d, vertexBuffer:%s", fragmentFile, length, (char*)fragmentBuffer);
+
+    if(vertexBuffer != NULL || fragmentBuffer != NULL)
+    {
+        m_program = createProgram((char*)vertexBuffer, (char*)fragmentBuffer);
+    }
+
+    free(vertexBuffer);
+    free(fragmentBuffer);
 }
 
 void Shader::Use()
@@ -28,7 +50,7 @@ void Shader::checkGlError(const char* op)
 	}
 }
 
-GLuint Shader::loadShader(GLenum shaderType, const char* pSource)
+unsigned int Shader::loadShader(int shaderType, const char* pSource)
 {
     GLuint shader = glCreateShader((GLenum) shaderType);
 	checkGlError("glCreateShader");
@@ -54,7 +76,7 @@ GLuint Shader::loadShader(GLenum shaderType, const char* pSource)
 	}
 	return shader;
 }
-GLuint Shader::createProgram(const char* vertex, const char* fragment)
+unsigned int Shader::createProgram(const char* vertex, const char* fragment)
 {
     GLuint vertexShader = loadShader(GL_VERTEX_SHADER, vertex);
 	if (!vertexShader) {

@@ -5,7 +5,6 @@
 #include "MessageQueue.h"
 #include "unistd.h"
 
-using namespace EGLDemo;
 Message::Message(int type) :
     Type(type)
 {

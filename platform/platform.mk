@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 LOCAL_PATH_TEMP := $(LOCAL_PATH)
 LOCAL_PATH := $(call my-dir)
 
@@ -20,20 +19,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := EGLPlatform
 
-
-# OpenGL ES 3.0
-LOCAL_EXPORT_LDLIBS := -lGLESv3
-# GL platform interface
-LOCAL_EXPORT_LDLIBS += -lEGL
-# logging
-LOCAL_EXPORT_LDLIBS += -llog
-# native windows
-LOCAL_EXPORT_LDLIBS += -landroid
-# For minizip
-LOCAL_EXPORT_LDLIBS += -lz
-
 LOCAL_SRC_FILES := obj/local/armeabi-v7a/libEGLPlatform.a
-
 
 include $(PREBUILT_STATIC_LIBRARY)
 

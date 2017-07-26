@@ -4,25 +4,28 @@
 
 #ifndef EGLDEMO_SHADER_H
 #define EGLDEMO_SHADER_H
-#include <GLES3/gl3.h>
-#include <GLES3/gl3ext.h>
+
 
 
 class Shader
 {
 public:
     static const bool CHECK_GL_ERROR = true;
-    Shader(const char* vertex, const char* fragment);
-    GLuint GetProgram(){return m_program;}
+
+    void CreateProgramFromString(const char* vertexString, const char* fragmentSting);
+    void CreateProgramFromFile(const char* vertexFile, const char* fragmentFile);
+
+    unsigned int GetProgram(){return m_program;}
     void Use();
 
 private:
     void checkGlError(const char* op);
-    GLuint loadShader(GLenum shaderType, const char* pSource);
-    GLuint createProgram(const char*, const char*);
+    unsigned int loadShader(int shaderType, const char* pSource);
+    unsigned int createProgram(const char*, const char*);
+
 
 private:
-    GLuint  m_program;
+    unsigned int  m_program;
 
 };
 

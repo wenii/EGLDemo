@@ -6,8 +6,8 @@
 #define EGLTEST_RENDER_H
 #include <GLES3/gl3.h>
 #include <GLES3/gl3ext.h>
+#include "Shader.h"
 
-class Shader;
 class Render
 {
 public:
@@ -17,7 +17,7 @@ public:
     void Init(int width, int height);
 
 private:
-    Shader* m_shader;
+    Shader m_shader;
     GLuint VAO;
     GLuint VBO;
     GLuint EBO;

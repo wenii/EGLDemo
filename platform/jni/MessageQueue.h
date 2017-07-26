@@ -6,8 +6,7 @@
 #define EGLDEMO_MESSAGEQUEUE_H
 #include <queue>
 #include <pthread.h>
-#include "Math.h"
-
+#include "DynamicArray.h"
 
 enum enMsgType
 {
@@ -49,7 +48,7 @@ public:
 
 private:
 	int			            Type;
-	EGLDemo::DynamicArray   Param;
+	DynamicArray            Param;
 
 };
 

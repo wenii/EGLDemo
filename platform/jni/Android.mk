@@ -24,7 +24,7 @@ LOCAL_SRC_FILES := App.cpp  \
                    Egl.cpp \
                    Shader.cpp \
                    MessageQueue.cpp \
-                   Math.cpp \
+                   DynamicArray.cpp \
                    PackageFiles.cpp \
                    Texture.cpp \
                    JniUtils.cpp \
@@ -40,17 +40,5 @@ LOCAL_SRC_FILES +=	$(THIRD_PARTY)/minizip/ioapi.c \
 					$(THIRD_PARTY)/minizip/unzip.c \
 					$(THIRD_PARTY)/minizip/zip.c
 
-LOCAL_EXPORT_C_INCLUDES := ./
-
-# OpenGL ES 3.0
-LOCAL_EXPORT_LDLIBS := -lGLESv3
-# GL platform interface
-LOCAL_EXPORT_LDLIBS += -lEGL
-# logging
-LOCAL_EXPORT_LDLIBS += -llog
-# native windows
-LOCAL_EXPORT_LDLIBS += -landroid
-# For minizip
-LOCAL_EXPORT_LDLIBS += -lz
 
 include $(BUILD_STATIC_LIBRARY)

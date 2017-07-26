@@ -51,7 +51,7 @@ void Egl::CreateContext()
 		EGL_BLUE_SIZE,  8,
 		EGL_GREEN_SIZE, 8,
 		EGL_RED_SIZE,   8,
-		EGL_DEPTH_SIZE, 0,
+		EGL_DEPTH_SIZE, 8,
 		EGL_SAMPLES,	0,
 		EGL_NONE
 	};
