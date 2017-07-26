@@ -1,1 +1,3 @@
-include ':platform', ':samples:texture'
+include ':platform',
+        ':samples:texture',
+        ':samples:transformations'
