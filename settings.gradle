@@ -1,3 +1,4 @@
 include ':platform',
         ':samples:texture',
-        ':samples:transformations'
+        ':samples:transformations',
+        ':samples:coordinatesystems'
