@@ -70,6 +70,8 @@ void* App::Callback(void* param)
 {
     App* app = (App*)param;
     app->ThreadFun();
+    delete app;
+    app = NULL;
 }
 
 void App::ThreadFun()
@@ -165,12 +167,11 @@ void App::OnActivityPause()
 
 void App::OnActivityStop()
 {
-
+    m_bStartRender = false;
 }
 
 void App::OnActivityDestroy()
 {
     m_bDestroy = true;
     Interface->Destroy();
-    delete this;
 }

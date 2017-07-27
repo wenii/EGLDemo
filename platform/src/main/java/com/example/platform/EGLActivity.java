@@ -76,6 +76,7 @@ public class EGLActivity extends Activity implements SurfaceHolder.Callback{
         Log.d(TAG, "onDestroy");
         super.onDestroy();
         nativeDestroy(app);
+        app = 0;
     }
 
 
