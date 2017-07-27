@@ -128,6 +128,9 @@ void App::ProcessEvent()
                 LOGD("App::ProcessEvent:MESSAGE_ON_ACTIVITY_DESTROY");
                 OnActivityDestroy();
                 break;
+            case MESSAGE_ON_GESTURE_SCROLL:
+                LOGD("App::ProcessEvent:MESSAGE_ON_GESTURE_SCROLL");
+                Interface->Command(msg);
             default:
                 LOGD("app::ProcessEvent:error type!");
                 break;

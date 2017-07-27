@@ -89,8 +89,24 @@ extern "C"
             Message msg(MESSAGE_ON_ACTIVITY_DESTROY);
             app->m_msgQueue->PostMessage(msg);
         }
+    }
 
-
+    void Java_com_example_platform_EGLActivity_nativeOnScroll(JNIEnv* jni, jclass clazz, jlong appPtr, jfloat benginX, jfloat beginY, jfloat endX, jfloat endY, jfloat distanceX, jfloat distanceY)
+    {
+        LOGD("nativeOnScroll");
+        App* app = (App*)appPtr;
+        if(app != NULL)
+        {
+            Message msg(MESSAGE_ON_GESTURE_SCROLL);
+            msg.SetParam(MSG_CONTENT_GESTURE_BEGIN_X, benginX);
+            msg.SetParam(MSG_CONTENT_GESTURE_BEGIN_Y, beginY);
+            msg.SetParam(MSG_CONTENT_GESTURE_END_X, endX);
+            msg.SetParam(MSG_CONTENT_GESTURE_END_Y, endY);
+            msg.SetParam(MSG_CONTENT_GESTURE_DISTANCE_X, distanceX);
+            msg.SetParam(MSG_CONTENT_GESTURE_DISTANCE_Y, distanceY);
+            app->m_msgQueue->PostMessage(msg);
+            LOGD("nativeOnScroll msg send ok...");
+        }
     }
 
 } //extern "C"
