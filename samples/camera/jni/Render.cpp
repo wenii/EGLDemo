@@ -20,6 +20,7 @@ Render::Render() :
     cameraUp    = glm::vec3(0.0f, 1.0f, 0.0f);
     Yaw = 0.0f;
     Pitch = 0.0f;
+    Fov = 45.0f;
 }
 
 Render::~Render()
@@ -134,7 +135,7 @@ void Render::Draw()
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
     glm::mat4 projection;
-    projection = glm::perspective(glm::radians(45.0f), (float)ScreenWidth/ScreenHeight, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(Fov), (float)ScreenWidth/ScreenHeight, 0.1f, 100.0f);
     GLint projectionLoc = glGetUniformLocation(m_shader.GetProgram(), "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
@@ -159,5 +160,24 @@ void Render::SetYawPatch(float xpos, float ypos)
     front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
     cameraFront = glm::normalize(front);
     cameraPos = cameraFront * 3.0f;
+}
+
+void Render::SetZoomParam(float offset)
+{
+    int range = ScreenWidth > ScreenHeight ? ScreenWidth : ScreenHeight;
+    float newOffset = 45.0 * offset / (float)range;
+
+    if(Fov >= 1.0f && Fov <= 45.0f)
+    {
+        Fov -= newOffset;
+    }
+    if(Fov <= 1.0f)
+    {
+        Fov = 1.0f;
+    }
+    if(Fov >= 45.0f)
+    {
+        Fov = 45.0f;
+    }
 }
 

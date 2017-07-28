@@ -129,6 +129,7 @@ void App::ProcessEvent()
                 OnActivityDestroy();
                 break;
             case MESSAGE_ON_GESTURE_SCROLL:
+            case MESSAGE_ON_GESTURE_ZOOM:
                 LOGD("App::ProcessEvent:MESSAGE_ON_GESTURE_SCROLL");
                 Interface->Command(msg);
             default:

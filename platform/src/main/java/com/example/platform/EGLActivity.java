@@ -23,12 +23,17 @@ public class EGLActivity extends Activity implements SurfaceHolder.Callback, Vie
     public static native void nativeSurfaceDestroy(long appPtr);
     public static native void nativeDestroy(long appPtr);
     public static native void nativeOnScroll(long appPtr, float benginX, float beginY, float endX, float endY, float distanceX, float distanceY);
+    public static native void nativeOnZoom(long appPtr, float oldDistance, float newDistance);
 
     private static final String TAG = "EGLDemo";
 
     private SurfaceView surfaceView;
     protected long app;
     private GestureDetectorCompat mGestureDetector;
+
+    private int touchCount = 0;
+    private float oldDistance = 0.0f;
+    private float newDistance = 0.0f;
 
 
     public String getPackageCodePath()
@@ -96,7 +101,52 @@ public class EGLActivity extends Activity implements SurfaceHolder.Callback, Vie
     public boolean onTouch(View v, MotionEvent event)
     {
         Log.d(TAG, "onTouch");
+        if(onZoom(event))
+        {
+            return true;
+        }
         return mGestureDetector.onTouchEvent(event);
+    }
+
+
+    public boolean onZoom(MotionEvent event)
+    {
+
+        switch(event.getAction() & MotionEvent.ACTION_MASK)
+        {
+            case MotionEvent.ACTION_DOWN:
+                touchCount = 1;
+                break;
+            case MotionEvent.ACTION_UP:
+                touchCount = 0;
+                break;
+            case MotionEvent.ACTION_POINTER_UP:
+                touchCount -= 1;
+                break;
+            case MotionEvent.ACTION_POINTER_DOWN:
+                oldDistance = getMutiPoiterDistance(event);
+                touchCount += 1;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (touchCount >= 2)
+                {
+                    newDistance = getMutiPoiterDistance(event);
+                    nativeOnZoom(app, oldDistance, newDistance);
+                    oldDistance = newDistance;
+                    return true;
+                }
+            default:
+                break;
+        }
+        return false;
+    }
+
+    private float getMutiPoiterDistance(MotionEvent event)
+    {
+        float x = event.getX(0) - event.getX(1);
+        float y = event.getY(0) - event.getY(1);
+        float distance = (float)Math.sqrt(Math.abs(x) * Math.abs(x) + Math.abs(y) * Math.abs(y));
+        return distance;
     }
 
 

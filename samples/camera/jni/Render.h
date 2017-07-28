@@ -19,6 +19,7 @@ public:
     void Draw();
     void Init(int width, int height);
     void SetYawPatch(float xpos, float ypos);
+    void SetZoomParam(float offset);
 
 private:
     Shader m_shader;
@@ -32,6 +33,7 @@ private:
 
     float Yaw;
     float Pitch;
+    float Fov;
     glm::vec3 cameraPos;
     glm::vec3 cameraFront;
     glm::vec3 cameraUp;

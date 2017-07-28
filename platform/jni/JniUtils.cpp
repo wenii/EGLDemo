@@ -109,6 +109,18 @@ extern "C"
         }
     }
 
+    void Java_com_example_platform_EGLActivity_nativeOnZoom(JNIEnv* jni, jclass clazz, jlong appPtr, jfloat oldDistance, jfloat newDistance)
+    {
+        App* app = (App*)appPtr;
+        if(app != NULL)
+        {
+            Message msg(MESSAGE_ON_GESTURE_ZOOM);
+            msg.SetParam(MSG_CONTENT_GESTURE_ZOOM_OLD_DISTANCE, oldDistance);
+            msg.SetParam(MSG_CONTENT_GESTURE_ZOOM_NEW_DISTANCE, newDistance);
+            app->m_msgQueue->PostMessage(msg);
+        }
+    }
+
 } //extern "C"
 
 void JniUtils::GetPackageCodePath(JNIEnv * jni, jclass activityClass, jobject activityObject, char* packageCodePath, int const maxLen)

@@ -22,7 +22,7 @@ LOCAL_MODULE    := camera
 
 LOCAL_SRC_FILES := JniInterface.cpp \
                    Render.cpp \
-                   Camera.cpp
+                   CameraDemo.cpp
 
 LOCAL_C_INCLUDES := ../../platform/jni \
                     ../../thirdparty

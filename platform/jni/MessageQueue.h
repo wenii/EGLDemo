@@ -15,7 +15,8 @@ enum enMsgType
     MESSAGE_ON_ACTIVITY_DESTROY,
     MESSAGE_ON_ACTIVITY_PAUSE,
     MESSAGE_ON_ACTIVITY_STOP,
-    MESSAGE_ON_GESTURE_SCROLL
+    MESSAGE_ON_GESTURE_SCROLL,
+    MESSAGE_ON_GESTURE_ZOOM
 };
 
 enum enMsgParamKey
@@ -28,7 +29,9 @@ enum enMsgParamKey
     MSG_CONTENT_GESTURE_END_X,
     MSG_CONTENT_GESTURE_END_Y,
     MSG_CONTENT_GESTURE_DISTANCE_X,
-    MSG_CONTENT_GESTURE_DISTANCE_Y
+    MSG_CONTENT_GESTURE_DISTANCE_Y,
+    MSG_CONTENT_GESTURE_ZOOM_OLD_DISTANCE,
+    MSG_CONTENT_GESTURE_ZOOM_NEW_DISTANCE
 };
 
 
@@ -41,7 +44,7 @@ public:
     Message(int type);
 
 public:
-    int  GetType(){return Type;}
+    int  GetType() const {return Type;}
 
     bool GetParam(int key, int& param) const;
     void SetParam(int key, const int& param);
