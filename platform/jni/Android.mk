@@ -20,6 +20,8 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE    := EGLPlatform
 
+LOCAL_C_INCLUDES := ../thirdparty
+
 LOCAL_SRC_FILES := App.cpp  \
                    Egl.cpp \
                    Shader.cpp \
@@ -28,7 +30,8 @@ LOCAL_SRC_FILES := App.cpp  \
                    PackageFiles.cpp \
                    Texture.cpp \
                    JniUtils.cpp \
-                   AppInterface.cpp
+                   AppInterface.cpp \
+                   Camera.cpp
 
 
 LOCAL_SRC_FILES +=	$(THIRD_PARTY)/stb/stb_image.c \
