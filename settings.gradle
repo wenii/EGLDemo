@@ -2,4 +2,5 @@ include ':platform',
         ':samples:texture',
         ':samples:transformations',
         ':samples:coordinatesystems',
-        ':samples:camera'
+        ':samples:camera',
+        ':samples:colors'
