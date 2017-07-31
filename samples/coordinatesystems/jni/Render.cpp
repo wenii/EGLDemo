@@ -27,21 +27,25 @@ float Render::Count = 0.0f;
     };
 
 Render::Render() :
-    VAO(0),
-    VBO(0)
+    m_VAO(0),
+    m_VBO(0),
+    m_texture0(0),
+    m_texture1(0),
+    m_screenWidth(0),
+    m_screenHeight(0)
 {
 }
 
 Render::~Render()
 {
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &m_VAO);
+    glDeleteBuffers(1, &m_VBO);
 }
 
 void Render::Init(int width, int height)
 {
-    ScreenWidth = width;
-    ScreenHeight = height;
+    m_screenWidth = width;
+    m_screenHeight = height;
     LOGD("Render::Init:glViewport:width:%d, height:%d", width, height);
     glViewport(0, 0, width, height);
     m_shader.CreateProgramFromFile("assets/vertex.glsl", "assets/fragment.glsl");
@@ -92,11 +96,11 @@ void Render::Init(int width, int height)
     };
 
 
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
+    glGenVertexArrays(1, &m_VAO);
+    glBindVertexArray(m_VAO);
 
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glGenBuffers(1, &m_VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
@@ -110,9 +114,9 @@ void Render::Init(int width, int height)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    texture0 = Texture::LoadTextureFromPackage("assets/container.jpg");
-    texture1 = Texture::LoadTextureFromPackage("assets/awesomeface.png");
-    LOGD("Render::Init:textID:%d, %d", texture0, texture1);
+    m_texture0 = Texture::LoadTextureFromPackage("assets/container.jpg");
+    m_texture1 = Texture::LoadTextureFromPackage("assets/awesomeface.png");
+    LOGD("Render::Init:textID:%d, %d", m_texture0, m_texture1);
 
     glEnable(GL_DEPTH_TEST);
 
@@ -127,18 +131,18 @@ void Render::Draw()
 	m_shader.Use();
 
 	glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture0);
+    glBindTexture(GL_TEXTURE_2D, m_texture0);
     glUniform1i(glGetUniformLocation(m_shader.GetProgram(), "Texture0"), 0);
 
 	glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, texture1);
+    glBindTexture(GL_TEXTURE_2D, m_texture1);
     glUniform1i(glGetUniformLocation(m_shader.GetProgram(), "Texture1"), 1);
 
     glm::mat4 view;
     view = glm::translate(view, glm::vec3(0.0f, 0.0f, -8.0f));
 
     glm::mat4 projection;
-    projection = glm::perspective(glm::radians(45.0f), (float)ScreenWidth/ScreenHeight, 0.1f, 100.0f);
+    projection = glm::perspective(glm::radians(45.0f), (float)m_screenWidth/m_screenHeight, 0.1f, 100.0f);
 
 
     GLint viewLoc = glGetUniformLocation(m_shader.GetProgram(), "view");
@@ -147,7 +151,7 @@ void Render::Draw()
     GLint projectionLoc = glGetUniformLocation(m_shader.GetProgram(), "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-    glBindVertexArray(VAO);
+    glBindVertexArray(m_VAO);
     for(int i = 0; i < 10; ++i)
     {
         glm::mat4 localModel;

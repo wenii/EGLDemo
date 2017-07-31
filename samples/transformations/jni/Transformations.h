@@ -10,12 +10,13 @@
 class Render;
 class Transformations :public AppInterface
 {
+public:
     virtual void InitGLes(int surfaceWidth, int surfaceHeight);
     virtual void OnDraw();
     virtual bool Command(const Message& msg);
     virtual void Destroy();
 
-    Render* render;
+    Render* m_render;
 };
 
 

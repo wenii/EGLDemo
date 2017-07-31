@@ -14,21 +14,6 @@ class AppInterface;
 class App
 {
 public:
-    pthread_t           m_threadId;
-    bool                m_bStartRender;
-    bool                m_bSetSurface;
-    bool                m_bDestroy;
-
-    Egl* m_egl;
-    MessageQueue* m_msgQueue;
-    ANativeWindow* m_nativeWindow;
-
-    JNIEnv* jni;
-    jobject javaObject;
-    jclass	ActivityClass;
-    AppInterface* Interface;
-
-public:
     App(AppInterface* interface, JNIEnv* jni, jobject activityObject);
     ~App();
     void Start();
@@ -43,6 +28,21 @@ private:
     void OnActivityPause();
     void OnActivityStop();
     void OnActivityDestroy();
+
+public:
+    pthread_t           m_threadId;
+    bool                m_bStartRender;
+    bool                m_bSetSurface;
+    bool                m_bDestroy;
+
+    Egl*                m_egl;
+    MessageQueue*       m_msgQueue;
+    ANativeWindow*      m_nativeWindow;
+    AppInterface*       m_interface;
+
+    JNIEnv*             m_jni;
+    jobject             m_javaObject;
+    jclass	            m_activityClass;
 
 
 

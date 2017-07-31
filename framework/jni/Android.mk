@@ -18,7 +18,7 @@ THIRD_PARTY := ../../thirdparty
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE    := EGLPlatform
+LOCAL_MODULE    := EGLFramework
 
 LOCAL_C_INCLUDES := ../thirdparty
 

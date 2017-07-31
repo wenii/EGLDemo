@@ -22,23 +22,21 @@ public:
     void SetZoomParam(float offset);
 
 private:
-    Shader m_shader;
-    GLuint VAO;
-    GLuint VBO;
-    GLuint texture0;
-    GLuint texture1;
+    Shader          m_shader;
+    GLuint          m_VAO;
+    GLuint          m_VBO;
+    GLuint          m_texture0;
+    GLuint          m_texture1;
 
-    int ScreenWidth;
-    int ScreenHeight;
+    int             m_screenWidth;
+    int             m_screenHeight;
 
-    float Yaw;
-    float Pitch;
-    float Fov;
-    glm::vec3 cameraPos;
-    glm::vec3 cameraFront;
-    glm::vec3 cameraUp;
-
-    static float Count;
+    float           m_Yaw;
+    float           m_Pitch;
+    float           m_Fov;
+    glm::vec3       m_cameraPos;
+    glm::vec3       m_cameraFront;
+    glm::vec3       m_cameraUp;
 
 };
 

@@ -20,14 +20,14 @@ public:
     void SetZoomParam(float offset);
 
 private:
-    Shader m_shader;
-    Shader m_lampShader;
-    GLuint VAO;
-    GLuint VBO;
-    GLuint LightVAO;
-    int ScreenWidth;
-    int ScreenHeight;
-    Camera camera;
+    Shader      m_shader;
+    Shader      m_lampShader;
+    GLuint      m_VAO;
+    GLuint      m_VBO;
+    GLuint      m_LightVAO;
+    int         m_ScreenWidth;
+    int         m_ScreenHeight;
+    Camera      m_camera;
 
 
 };

@@ -11,31 +11,35 @@
 #include "AppInterface.h"
 
 
-static const char* activityClassName = "com/example/platform/EGLActivity";
+static const char* activityClassName = "com/example/framework/EGLActivity";
 
 
-App::App(AppInterface* interface, JNIEnv* jni, jobject activityObject)
+App::App(AppInterface* interface, JNIEnv* jni, jobject activityObject) :
+    m_threadId(0),
+    m_bStartRender(false),
+    m_bSetSurface(false),
+    m_bDestroy(false),
+    m_egl(NULL),
+    m_msgQueue(NULL),
+    m_nativeWindow(NULL),
+    m_interface(interface),
+    m_jni(jni)
+
+
 {
-    interface->app = this;
-    Interface = interface;
+    interface->m_app = this;
 
-    m_nativeWindow = NULL;
-    m_bStartRender = false;
-    m_bSetSurface = false;
-    m_bDestroy = false;
-    this->jni = jni;
+    m_javaObject = m_jni->NewGlobalRef( activityObject);
 
-    javaObject = jni->NewGlobalRef( activityObject);
-
-    jclass lc = jni->FindClass(activityClassName);
+    jclass lc = m_jni->FindClass(activityClassName);
     if ( lc != 0 )
     {
-    	ActivityClass = (jclass)jni->NewGlobalRef( lc );
+    	m_activityClass = (jclass)m_jni->NewGlobalRef( lc );
     }
-    jni->DeleteLocalRef( lc );
+    m_jni->DeleteLocalRef( lc );
 
     char apkPath[1024];
-    JniUtils::GetPackageCodePath( jni, ActivityClass, javaObject, apkPath, sizeof( apkPath ) );
+    JniUtils::GetPackageCodePath( m_jni, m_activityClass, m_javaObject, apkPath, sizeof( apkPath ) );
     LOGD("apkPath:%s", apkPath);
 
     PackageFiles::SetZipFilePath(apkPath);
@@ -52,8 +56,8 @@ App::~App()
     delete m_msgQueue;
     m_msgQueue = NULL;
 
-    delete Interface;
-    Interface = NULL;
+    delete m_interface;
+    m_interface = NULL;
 
 }
 
@@ -92,7 +96,7 @@ void App::ThreadFun()
         if(m_bStartRender)
         {
             //LOGD("Draw");
-            Interface->OnDraw();
+            m_interface->OnDraw();
             m_egl->SwapBuffers();
         }
 
@@ -131,7 +135,7 @@ void App::ProcessEvent()
             case MESSAGE_ON_GESTURE_SCROLL:
             case MESSAGE_ON_GESTURE_ZOOM:
                 LOGD("App::ProcessEvent:MESSAGE_ON_GESTURE_SCROLL");
-                Interface->Command(msg);
+                m_interface->Command(msg);
             default:
                 LOGD("app::ProcessEvent:error type!");
                 break;
@@ -152,7 +156,7 @@ void App::OnSurfaceChanged(const Message& msg)
             int height = 0;
             msg.GetParam(MSG_CONTENT_SURFACE_WIDTH, width);
             msg.GetParam(MSG_CONTENT_SURFACE_HEIGHT, height);
-            Interface->InitGLes(width, height);
+            m_interface->InitGLes(width, height);
             m_bStartRender = true;
         }
     }
@@ -177,5 +181,5 @@ void App::OnActivityStop()
 void App::OnActivityDestroy()
 {
     m_bDestroy = true;
-    Interface->Destroy();
+    m_interface->Destroy();
 }

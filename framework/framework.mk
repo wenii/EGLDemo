@@ -17,9 +17,9 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE    := EGLPlatform
+LOCAL_MODULE    := EGLFramework
 
-LOCAL_SRC_FILES := obj/local/armeabi-v7a/libEGLPlatform.a
+LOCAL_SRC_FILES := obj/local/armeabi-v7a/libEGLFramework.a
 
 include $(PREBUILT_STATIC_LIBRARY)
 
@@ -28,7 +28,7 @@ include $(CLEAR_VARS)
 
 LOCAL_ARM_MODE  := arm
 
-LOCAL_STATIC_LIBRARIES := EGLPlatform
+LOCAL_STATIC_LIBRARIES := EGLFramework
 
 LOCAL_PATH := $(LOCAL_PATH_TEMP)
 

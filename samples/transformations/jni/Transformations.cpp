@@ -8,13 +8,13 @@
 
 void Transformations::InitGLes(int surfaceWidth, int surfaceHeight)
 {
-    render = new Render;
-    render->Init(surfaceWidth, surfaceHeight);
+    m_render = new Render;
+    m_render->Init(surfaceWidth, surfaceHeight);
 }
 
 void Transformations::OnDraw()
 {
-    render->Draw();
+    m_render->Draw();
 }
 
 bool Transformations::Command(const Message& msg)

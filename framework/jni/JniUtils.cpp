@@ -11,7 +11,7 @@
 
 extern "C"
 {
-    void Java_com_example_platform_EGLActivity_nativeStart(JNIEnv* jni, jclass clazz, jlong appPtr)
+    void Java_com_example_framework_EGLActivity_nativeStart(JNIEnv* jni, jclass clazz, jlong appPtr)
     {
         LOGD("nativeStart!");
         App* app = (App*)appPtr;
@@ -21,7 +21,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_platform_EGLActivity_nativePause(JNIEnv* jni, jclass clazz, jlong appPtr)
+    void Java_com_example_framework_EGLActivity_nativePause(JNIEnv* jni, jclass clazz, jlong appPtr)
     {
         LOGD("nativePause!");
         App* app = (App*)appPtr;
@@ -32,7 +32,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_platform_EGLActivity_nativeStop(JNIEnv* jni, jclass clazz, jlong appPtr)
+    void Java_com_example_framework_EGLActivity_nativeStop(JNIEnv* jni, jclass clazz, jlong appPtr)
     {
         LOGD("nativeStop!");
         App* app = (App*)appPtr;
@@ -43,7 +43,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_platform_EGLActivity_nativeSurfaceChanged(JNIEnv* jni, jclass clazz, jlong appPtr, jobject surface, jint width, jint height)
+    void Java_com_example_framework_EGLActivity_nativeSurfaceChanged(JNIEnv* jni, jclass clazz, jlong appPtr, jobject surface, jint width, jint height)
     {
         LOGD("nativeSurfaceChanged!");
         ANativeWindow * newNativeWindow = ANativeWindow_fromSurface( jni, surface );
@@ -69,7 +69,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_platform_EGLActivity_nativeSurfaceDestroy(JNIEnv* jni, jclass clazz, jlong appPtr)
+    void Java_com_example_framework_EGLActivity_nativeSurfaceDestroy(JNIEnv* jni, jclass clazz, jlong appPtr)
     {
         LOGD("nativeSurfaceDestroy!");
         App* app = (App*)appPtr;
@@ -80,7 +80,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_platform_EGLActivity_nativeDestroy(JNIEnv* jni, jclass clazz, jlong appPtr)
+    void Java_com_example_framework_EGLActivity_nativeDestroy(JNIEnv* jni, jclass clazz, jlong appPtr)
     {
         LOGD("nativeActiveDestroy!");
         App* app = (App*)appPtr;
@@ -91,7 +91,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_platform_EGLActivity_nativeOnScroll(JNIEnv* jni, jclass clazz, jlong appPtr, jfloat benginX, jfloat beginY, jfloat endX, jfloat endY, jfloat distanceX, jfloat distanceY)
+    void Java_com_example_framework_EGLActivity_nativeOnScroll(JNIEnv* jni, jclass clazz, jlong appPtr, jfloat benginX, jfloat beginY, jfloat endX, jfloat endY, jfloat distanceX, jfloat distanceY)
     {
         LOGD("nativeOnScroll");
         App* app = (App*)appPtr;
@@ -109,7 +109,7 @@ extern "C"
         }
     }
 
-    void Java_com_example_platform_EGLActivity_nativeOnZoom(JNIEnv* jni, jclass clazz, jlong appPtr, jfloat oldDistance, jfloat newDistance)
+    void Java_com_example_framework_EGLActivity_nativeOnZoom(JNIEnv* jni, jclass clazz, jlong appPtr, jfloat oldDistance, jfloat newDistance)
     {
         App* app = (App*)appPtr;
         if(app != NULL)

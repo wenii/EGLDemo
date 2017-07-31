@@ -18,12 +18,12 @@ AppInterface::~AppInterface()
 
 void AppInterface::InitGLes(int surfaceWidth, int surfaceHeight)
 {
-    //render.Init(surfaceWidth, surfaceHeight);
+
 }
 
 void AppInterface::OnDraw()
 {
-    //render.Draw();
+
 }
 
 bool AppInterface::Command(const Message& msg)

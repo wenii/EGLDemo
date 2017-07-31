@@ -6,7 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/samples/camera/camera.iml" filepath="$PROJECT_DIR$/samples/camera/camera.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/colors/colors.iml" filepath="$PROJECT_DIR$/samples/colors/colors.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/coordinatesystems/coordinatesystems.iml" filepath="$PROJECT_DIR$/samples/coordinatesystems/coordinatesystems.iml" />
-      <module fileurl="file://$PROJECT_DIR$/platform/platform.iml" filepath="$PROJECT_DIR$/platform/platform.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/samples.iml" filepath="$PROJECT_DIR$/samples/samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/texture/texture.iml" filepath="$PROJECT_DIR$/samples/texture/texture.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/transformations/transformations.iml" filepath="$PROJECT_DIR$/samples/transformations/transformations.iml" />

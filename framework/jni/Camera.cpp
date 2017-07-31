@@ -15,7 +15,7 @@ Camera::Camera() :
 
 }
 
-glm::mat4 Camera::GetView()
+glm::mat4 Camera::GetViewMatrix()
 {
     return glm::lookAt(m_cameraPos, m_cameraFront, m_cameraUp);
 }

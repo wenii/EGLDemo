@@ -16,7 +16,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-include ../../platform/platform.mk
+include ../../framework/framework.mk
 
 LOCAL_MODULE    := colors
 
@@ -24,7 +24,7 @@ LOCAL_SRC_FILES := JniInterface.cpp \
                    Render.cpp \
                    Colors.cpp
 
-LOCAL_C_INCLUDES := ../../platform/jni ../../thirdparty
+LOCAL_C_INCLUDES := ../../framework/jni ../../thirdparty
 LOCAL_LDLIBS := -llog -landroid -lEGL -lGLESv3 -lz
 
 include $(BUILD_SHARED_LIBRARY)

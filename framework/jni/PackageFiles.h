@@ -16,8 +16,8 @@ public:
 private:
     static void OpenZipFile(const char* filePath);
 private:
-    static char zipFilePath[1024];
-    static unzFile zipFile;
+    static char         zipFilePath[1024];
+    static unzFile      zipFile;
 };
 
 

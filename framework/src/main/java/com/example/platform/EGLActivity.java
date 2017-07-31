@@ -1,4 +1,4 @@
-package com.example.platform;
+package com.example.framework;
 
 import android.app.Activity;
 import android.os.Bundle;

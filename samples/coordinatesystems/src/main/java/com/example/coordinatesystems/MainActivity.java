@@ -1,7 +1,7 @@
 package com.example.coordinatesystems;
 
 import android.os.Bundle;
-import com.example.platform.EGLActivity;
+import com.example.framework.EGLActivity;
 
 public class MainActivity extends EGLActivity {
 

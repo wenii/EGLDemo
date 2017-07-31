@@ -7,12 +7,12 @@
 
 void CoordinateSystems::InitGLes(int surfaceWidth, int surfaceHeight)
 {
-    render.Init(surfaceWidth, surfaceHeight);
+    m_render.Init(surfaceWidth, surfaceHeight);
 }
 
 void CoordinateSystems::OnDraw()
 {
-    render.Draw();
+    m_render.Draw();
 }
 
 bool CoordinateSystems::Command(const Message& msg)

@@ -7,12 +7,12 @@
 
 void TextureDemo::InitGLes(int surfaceWidth, int surfaceHeight)
 {
-    render.Init(surfaceWidth, surfaceHeight);
+    m_render.Init(surfaceWidth, surfaceHeight);
 }
 
 void TextureDemo::OnDraw()
 {
-    render.Draw();
+    m_render.Draw();
 }
 
 bool TextureDemo::Command(const Message& msg)

@@ -16,7 +16,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-include ../../platform/platform.mk
+include ../../framework/framework.mk
 
 LOCAL_MODULE    := texture
 
@@ -24,7 +24,7 @@ LOCAL_SRC_FILES := JniInterface.cpp \
                    Render.cpp \
                    TextureDemo.cpp
 
-LOCAL_C_INCLUDES := ../../platform/jni
+LOCAL_C_INCLUDES := ../../framework/jni
 LOCAL_LDLIBS := -llog -landroid -lEGL -lGLESv3 -lz
 
 include $(BUILD_SHARED_LIBRARY)

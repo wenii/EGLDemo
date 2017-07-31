@@ -8,12 +8,12 @@
 
 void CameraDemo::InitGLes(int surfaceWidth, int surfaceHeight)
 {
-    render.Init(surfaceWidth, surfaceHeight);
+    m_render.Init(surfaceWidth, surfaceHeight);
 }
 
 void CameraDemo::OnDraw()
 {
-    render.Draw();
+    m_render.Draw();
 }
 
 bool CameraDemo::Command(const Message& msg)
@@ -53,7 +53,7 @@ void CameraDemo::OnScroll(const Message& msg)
     msg.GetParam(MSG_CONTENT_GESTURE_DISTANCE_Y, distanceY);
     LOGD("Camera::Command:beginX:%f--beginY:%f--endX:%f--endY:%f--distanceX:%f--distanceY:%f",
         beginX, beginY, endX, endY, distanceX, distanceY);
-    render.SetYawPatch(distanceX, distanceY);
+    m_render.SetYawPatch(distanceX, distanceY);
 }
 
 void CameraDemo::OnZoom(const Message& msg)
@@ -66,5 +66,5 @@ void CameraDemo::OnZoom(const Message& msg)
     LOGD("Camera::Command:OnZoom:oldDistance:%f, newDistance:%f", oldDistance, newDistance);
 
     float offset = newDistance - oldDistance;
-    render.SetZoomParam(offset);
+    m_render.SetZoomParam(offset);
 }

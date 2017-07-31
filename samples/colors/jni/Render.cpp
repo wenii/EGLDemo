@@ -12,25 +12,25 @@
 #include "glm/gtc/type_ptr.hpp"
 
 Render::Render() :
-    VAO(0),
-    VBO(0),
-    LightVAO(0),
-    ScreenWidth(0),
-    ScreenHeight(0)
+    m_VAO(0),
+    m_VBO(0),
+    m_LightVAO(0),
+    m_ScreenWidth(0),
+    m_ScreenHeight(0)
 {
 }
 
 Render::~Render()
 {
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &m_VAO);
+    glDeleteBuffers(1, &m_VBO);
 
 }
 
 void Render::Init(int width, int height)
 {
-    ScreenWidth = width;
-    ScreenHeight = height;
+    m_ScreenWidth = width;
+    m_ScreenHeight = height;
     LOGD("Render::Init:glViewport:width:%d, height:%d", width, height);
     glViewport(0, 0, width, height);
     m_shader.CreateProgramFromFile("assets/vertex.glsl", "assets/fragment.glsl");
@@ -81,11 +81,11 @@ void Render::Init(int width, int height)
         -0.5f,  0.5f, -0.5f,
     };
 
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
+    glGenVertexArrays(1, &m_VAO);
+    glBindVertexArray(m_VAO);
 
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glGenBuffers(1, &m_VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
@@ -95,10 +95,10 @@ void Render::Init(int width, int height)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    glGenVertexArrays(1, &LightVAO);
-    glBindVertexArray(LightVAO);
+    glGenVertexArrays(1, &m_LightVAO);
+    glBindVertexArray(m_LightVAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(0);
@@ -125,15 +125,15 @@ void Render::Draw()
     GLint modelLoc = glGetUniformLocation(m_shader.GetProgram(), "model");
     glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-    glm::mat4 view = camera.GetView();
+    glm::mat4 view = m_camera.GetViewMatrix();
     GLint viewLoc = glGetUniformLocation(m_shader.GetProgram(), "view");
     glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
-    glm::mat4 projection = glm::perspective(glm::radians(camera.GetFov()), (float)ScreenWidth/(float)ScreenHeight, 0.1f, 100.0f);
+    glm::mat4 projection = glm::perspective(glm::radians(m_camera.GetFov()), (float)m_ScreenWidth/(float)m_ScreenHeight, 0.1f, 100.0f);
     GLint projectionLoc = glGetUniformLocation(m_shader.GetProgram(), "projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-    glBindVertexArray(VAO);
+    glBindVertexArray(m_VAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
     //------DRAW LAMP----------
@@ -150,7 +150,7 @@ void Render::Draw()
     GLint lampProjectionLoc = glGetUniformLocation(m_lampShader.GetProgram(), "projection");
     glUniformMatrix4fv(lampProjectionLoc, 1, GL_FALSE, value_ptr(projection));
 
-    glBindVertexArray(LightVAO);
+    glBindVertexArray(m_LightVAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
     glBindVertexArray(0);
@@ -159,11 +159,11 @@ void Render::Draw()
 
 void Render::SetYawPatch(float xpos, float ypos)
 {
-    camera.SetPos(xpos, ypos);
+    m_camera.SetPos(xpos, ypos);
 }
 
 void Render::SetZoomParam(float offset)
 {
-    camera.SetFov(offset);
+    m_camera.SetFov(offset);
 }
 

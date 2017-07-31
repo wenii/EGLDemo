@@ -44,7 +44,7 @@ public:
     Message(int type);
 
 public:
-    int  GetType() const {return Type;}
+    int  GetType() const {return m_type;}
 
     bool GetParam(int key, int& param) const;
     void SetParam(int key, const int& param);
@@ -57,8 +57,8 @@ public:
 
 
 private:
-	int			            Type;
-	DynamicArray            Param;
+	int			            m_type;
+	DynamicArray            m_param;
 
 };
 
@@ -74,9 +74,9 @@ public:
     void SetEnable(bool enable);
 
 private:
-	std::queue<Message>      Messages;
-	pthread_mutex_t		     Mutex;
-	volatile bool            Enable;
+	std::queue<Message>      m_messages;
+	pthread_mutex_t		     m_mutex;
+	volatile bool            m_enable;
 
 };
 

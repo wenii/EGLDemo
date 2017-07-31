@@ -16,14 +16,14 @@ public:
     void Init(int width, int height);
 
 private:
-    Shader m_shader;
-    GLuint VAO;
-    GLuint VBO;
-    GLuint texture0;
-    GLuint texture1;
+    Shader      m_shader;
+    GLuint      m_VAO;
+    GLuint      m_VBO;
+    GLuint      m_texture0;
+    GLuint      m_texture1;
 
-    int ScreenWidth;
-    int ScreenHeight;
+    int         m_screenWidth;
+    int         m_screenHeight;
 
     static float Count;
 

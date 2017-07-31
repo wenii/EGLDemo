@@ -20,7 +20,7 @@ public:
     void OnScroll(const Message& msg);
     void OnZoom(const Message& msg);
 
-    Render render;
+    Render m_render;
 };
 
 

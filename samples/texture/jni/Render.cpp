@@ -8,15 +8,18 @@
 #include "Texture.h"
 
 Render::Render() :
-    VAO(0),
-    VBO(0)
+    m_VAO(0),
+    m_VBO(0),
+    m_EBO(0),
+    m_texture0(0),
+    m_texture1(0)
 {
 }
 
 Render::~Render()
 {
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &m_VAO);
+    glDeleteBuffers(1, &m_VBO);
 
 }
 
@@ -41,16 +44,16 @@ void Render::Init(int width, int height)
         1, 2, 3  // Second Triangle
     };
 
-    glGenVertexArrays(1, &VAO);
-    glBindVertexArray(VAO);
+    glGenVertexArrays(1, &m_VAO);
+    glBindVertexArray(m_VAO);
 
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glGenBuffers(1, &m_VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, m_VBO);
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glGenBuffers(1, &EBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glGenBuffers(1, &m_EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
@@ -62,9 +65,9 @@ void Render::Init(int width, int height)
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    texture0 = Texture::LoadTextureFromPackage("assets/container.jpg");
-    texture1 = Texture::LoadTextureFromPackage("assets/awesomeface.png");
-    LOGD("Render::Init:textID:%d, %d", texture0, texture1);
+    m_texture0 = Texture::LoadTextureFromPackage("assets/container.jpg");
+    m_texture1 = Texture::LoadTextureFromPackage("assets/awesomeface.png");
+    LOGD("Render::Init:textID:%d, %d", m_texture0, m_texture1);
 
 }
 
@@ -75,14 +78,14 @@ void Render::Draw()
 	m_shader.Use();
 
 	glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture0);
+    glBindTexture(GL_TEXTURE_2D, m_texture0);
     glUniform1i(glGetUniformLocation(m_shader.GetProgram(), "Texture0"), 0);
 
 	glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, texture1);
+    glBindTexture(GL_TEXTURE_2D, m_texture1);
     glUniform1i(glGetUniformLocation(m_shader.GetProgram(), "Texture1"), 1);
 
-    glBindVertexArray(VAO);
+    glBindVertexArray(m_VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }

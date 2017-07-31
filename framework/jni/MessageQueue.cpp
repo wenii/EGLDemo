@@ -6,84 +6,84 @@
 #include "unistd.h"
 
 Message::Message(int type) :
-    Type(type)
+    m_type(type)
 {
 }
 
 
 bool Message::GetParam(int key, int& param) const
 {
-    return Param.GetValue(key, param);
+    return m_param.GetValue(key, param);
 }
 
 void Message::SetParam(int key, const int& param)
 {
-    Param.SetValue(key, param);
+    m_param.SetValue(key, param);
 }
 
 bool Message::GetParam(int key, float& param) const
 {
-    return Param.GetValue(key, param);
+    return m_param.GetValue(key, param);
 }
 
 void Message::SetParam(int key, const float& param)
 {
-    Param.SetValue(key, param);
+    m_param.SetValue(key, param);
 }
 
 bool Message::GetParam(int key, void*& param) const
 {
-    return Param.GetValue(key, param);
+    return m_param.GetValue(key, param);
 }
 
 void Message::SetParam(int key, const void* param)
 {
-    Param.SetValue(key, param);
+    m_param.SetValue(key, param);
 }
 
 
 //-------------------------------------------------------------------------
-MessageQueue::MessageQueue()
+MessageQueue::MessageQueue() :
+    m_enable(true)
 {
-    Enable = true;
-    pthread_mutex_init( &Mutex, NULL );
+    pthread_mutex_init( &m_mutex, NULL );
 }
 
 MessageQueue::~MessageQueue()
 {
-    pthread_mutex_destroy(&Mutex);
+    pthread_mutex_destroy(&m_mutex);
 }
 
 void MessageQueue::SetEnable(bool enable)
 {
-    pthread_mutex_lock(&Mutex);
-    Enable = enable;
-    pthread_mutex_unlock(&Mutex);
+    pthread_mutex_lock(&m_mutex);
+    m_enable = enable;
+    pthread_mutex_unlock(&m_mutex);
 }
 
 void MessageQueue::PostMessage(const Message& message)
 {
-    pthread_mutex_lock(&Mutex);
-    if(!Enable)
+    pthread_mutex_lock(&m_mutex);
+    if(!m_enable)
     {
-        pthread_mutex_unlock(&Mutex);
+        pthread_mutex_unlock(&m_mutex);
         return;
     }
-    Messages.push(message);
-    pthread_mutex_unlock(&Mutex);
+    m_messages.push(message);
+    pthread_mutex_unlock(&m_mutex);
 }
 
 bool MessageQueue::GetNextMessage(Message& msg)
 {
-    pthread_mutex_lock(&Mutex);
-    if(!Messages.empty())
+    pthread_mutex_lock(&m_mutex);
+    if(!m_messages.empty())
     {
-        msg = Messages.front();
-        Messages.pop();
-        pthread_mutex_unlock(&Mutex);
+        msg = m_messages.front();
+        m_messages.pop();
+        pthread_mutex_unlock(&m_mutex);
         return true;
     }
-    pthread_mutex_unlock(&Mutex);
+    pthread_mutex_unlock(&m_mutex);
     return false;
 
 }

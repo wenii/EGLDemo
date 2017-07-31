@@ -1,4 +1,4 @@
-include ':platform',
+include ':framework',
         ':samples:texture',
         ':samples:transformations',
         ':samples:coordinatesystems',

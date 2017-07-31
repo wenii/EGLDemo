@@ -10,6 +10,7 @@
 
 class CameraDemo : public AppInterface
 {
+private:
     virtual void InitGLes(int surfaceWidth, int surfaceHeight);
     virtual void OnDraw();
     virtual bool Command(const Message& msg);
@@ -18,7 +19,7 @@ class CameraDemo : public AppInterface
     void OnScroll(const Message& msg);
     void OnZoom(const Message& msg);
 
-    Render render;
+    Render m_render;
 };
 
 

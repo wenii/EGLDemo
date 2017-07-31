@@ -21,12 +21,8 @@ public:
 
     App* SetActivity(JNIEnv* jni, jobject activityObject);
 
-    //test
-    //Render render;
-    //end
-
 public:
-    App* app;
+    App* m_app;
 };
 
 

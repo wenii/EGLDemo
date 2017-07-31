@@ -14,18 +14,19 @@ class Camera {
 public:
     Camera();
 
-    glm::mat4 GetView();
+    glm::mat4 GetViewMatrix();
     float GetFov(){return m_fov;}
     void SetFov(float offset);
     void SetPos(float yawOffset, float pitchOffset);
-private:
-    float m_fov;
-    float m_yaw;
-    float m_pitch;
 
-    glm::vec3 m_cameraPos;
-    glm::vec3 m_cameraFront;
-    glm::vec3 m_cameraUp;
+private:
+    float       m_fov;
+    float       m_yaw;
+    float       m_pitch;
+
+    glm::vec3   m_cameraPos;
+    glm::vec3   m_cameraFront;
+    glm::vec3   m_cameraUp;
 
 
 };

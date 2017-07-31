@@ -18,11 +18,11 @@ public:
 
 private:
     Shader m_shader;
-    GLuint VAO;
-    GLuint VBO;
-    GLuint EBO;
-    GLuint texture0;
-    GLuint texture1;
+    GLuint m_VAO;
+    GLuint m_VBO;
+    GLuint m_EBO;
+    GLuint m_texture0;
+    GLuint m_texture1;
 
 
 };
