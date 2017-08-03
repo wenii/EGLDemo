@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EGLDemo.iml" filepath="$PROJECT_DIR$/EGLDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/basiclighting/basiclighting.iml" filepath="$PROJECT_DIR$/samples/basiclighting/basiclighting.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/camera/camera.iml" filepath="$PROJECT_DIR$/samples/camera/camera.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/colors/colors.iml" filepath="$PROJECT_DIR$/samples/colors/colors.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/coordinatesystems/coordinatesystems.iml" filepath="$PROJECT_DIR$/samples/coordinatesystems/coordinatesystems.iml" />
