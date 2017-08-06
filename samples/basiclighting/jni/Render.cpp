@@ -125,6 +125,7 @@ void Render::Draw()
     glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
 
     m_shader.SetUniform3f("lightPos", lightPos.x, lightPos.y, lightPos.z);
+    m_shader.SetUniform3f("viewPos", m_camera.m_cameraPos.x, m_camera.m_cameraPos.y, m_camera.m_cameraPos.z);
 
     glm::mat4 model;
     GLint modelLoc = glGetUniformLocation(m_shader.GetProgram(), "model");
