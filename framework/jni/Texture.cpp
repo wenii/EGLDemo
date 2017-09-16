@@ -8,6 +8,7 @@
 #include <GLES3/gl3ext.h>
 #include <unistd.h>
 #include "PackageFiles.h"
+#include "Log.h"
 
 
 unsigned int Texture::LoadTextureFromBuffer(void* buffer, int length)
@@ -15,7 +16,8 @@ unsigned int Texture::LoadTextureFromBuffer(void* buffer, int length)
 
     GLuint textID = 0;
     int comp , width, height;
-    stbi_uc * image = stbi_load_from_memory( (unsigned char *)buffer, length, &width, &height, &comp, 4 );
+    stbi_uc * image = stbi_load_from_memory( (unsigned char *)buffer, length, &width, &height, &comp, STBI_rgb_alpha );
+    LOGD("comp:%d", comp);
     if(image != NULL)
     {
         glGenTextures(1, &textID);
