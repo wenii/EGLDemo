@@ -3,12 +3,21 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EGLDemo.iml" filepath="$PROJECT_DIR$/EGLDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/framework/EGLDemo-framework.iml" filepath="$PROJECT_DIR$/framework/EGLDemo-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/EGLDemo-samples.iml" filepath="$PROJECT_DIR$/samples/EGLDemo-samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/basiclighting/basiclighting.iml" filepath="$PROJECT_DIR$/samples/basiclighting/basiclighting.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/camera/camera.iml" filepath="$PROJECT_DIR$/samples/camera/camera.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/colors/colors.iml" filepath="$PROJECT_DIR$/samples/colors/colors.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/coordinatesystems/coordinatesystems.iml" filepath="$PROJECT_DIR$/samples/coordinatesystems/coordinatesystems.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/repos-EGLDemo.iml" filepath="$PROJECT_DIR$/repos-EGLDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/samples.iml" filepath="$PROJECT_DIR$/samples/samples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/basiclighting/samples-basiclighting.iml" filepath="$PROJECT_DIR$/samples/basiclighting/samples-basiclighting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/camera/samples-camera.iml" filepath="$PROJECT_DIR$/samples/camera/samples-camera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/colors/samples-colors.iml" filepath="$PROJECT_DIR$/samples/colors/samples-colors.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/coordinatesystems/samples-coordinatesystems.iml" filepath="$PROJECT_DIR$/samples/coordinatesystems/samples-coordinatesystems.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/texture/samples-texture.iml" filepath="$PROJECT_DIR$/samples/texture/samples-texture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/transformations/samples-transformations.iml" filepath="$PROJECT_DIR$/samples/transformations/samples-transformations.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/texture/texture.iml" filepath="$PROJECT_DIR$/samples/texture/texture.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/transformations/transformations.iml" filepath="$PROJECT_DIR$/samples/transformations/transformations.iml" />
     </modules>
