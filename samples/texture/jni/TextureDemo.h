@@ -16,6 +16,9 @@ public:
     virtual bool Command(const Message& msg);
     virtual void Destroy();
 
+    void OnScroll(const Message& msg);
+    void OnZoom(const Message& msg);
+
     Render m_render;
 
 };

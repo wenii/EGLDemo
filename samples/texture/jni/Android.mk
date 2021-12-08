@@ -24,7 +24,9 @@ LOCAL_SRC_FILES := JniInterface.cpp \
                    Render.cpp \
                    TextureDemo.cpp
 
-LOCAL_C_INCLUDES := ../../framework/jni
+LOCAL_C_INCLUDES := ../../framework/jni \
+                    ../../thirdparty
+
 LOCAL_LDLIBS := -llog -landroid -lEGL -lGLESv3 -lz
 
 include $(BUILD_SHARED_LIBRARY)
