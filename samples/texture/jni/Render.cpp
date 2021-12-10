@@ -118,18 +118,8 @@ void Render::Draw()
     vec = glm::normalize(vec);
     model = glm::translate(model, vec);
 
-    GLint modelLoc = glGetUniformLocation(m_shader.GetProgram(), "model");
-    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-    glm::mat4 view;
-    view = glm::lookAt(m_cameraPos, glm::vec3(0.0f, 0.0f, 0.0f), m_cameraUp);
-    GLint viewLoc = glGetUniformLocation(m_shader.GetProgram(), "view");
-    glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-
-    glm::mat4 projection;
-    projection = glm::ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.0f, 1.0f);
-    GLint projectionLoc = glGetUniformLocation(m_shader.GetProgram(), "projection");
-    glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+     GLint transformLoc = glGetUniformLocation(m_shader.GetProgram(), "transform");
+     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(model));
 
     glBindVertexArray(m_VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -166,6 +156,10 @@ void Render::SetYawPatch(float xpos, float ypos)
 void Render::SetZoomParam(float offset)
 {
     m_scale += offset;
+    float sum = sqrt((float)m_screenWidth * m_screenWidth + (float)m_screenHeight * m_screenHeight);
+    if(m_scale < sum){
+            m_scale = sum;
+    }
 }
 
 
